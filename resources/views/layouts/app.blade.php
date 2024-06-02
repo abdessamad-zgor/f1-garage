@@ -5,7 +5,7 @@
     <title>Laravel - ItSolutionStuff.com</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
-<body class="bg-zinc-800">
+<body class="bg-zinc-200">
 
 <nav class="navbar navbar-expand-lg navbar-light navbar-laravel mb-4">
     <div class="container">

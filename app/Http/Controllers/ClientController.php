@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
     public function index()
     {
+        if (Auth::check()) {
+        } else {
+        }
         return view('clients.index');
     }
 

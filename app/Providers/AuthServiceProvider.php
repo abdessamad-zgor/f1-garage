@@ -6,7 +6,18 @@ namespace App\Providers;
 
 use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+
+function checkDatabaseConnection()
+{
+    try {
+        DB::connection()->getPdo();
+        return true; // Connection successful
+    } catch (\Exception $e) {
+        return false; // Connection failed
+    }
+}
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -24,19 +35,24 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
-        User::create([
-            'email' => "admin@f1-garage.com",
-            'password' => Hash::make("admin"),
-            'name' => "Edemond Garo",
-            'role' => "admin"
-        ]);
-        //
-        User::create([
-            'email' => "tech@f1-garage.com",
-            'password' => Hash::make("technician"),
-            'name' => "Hector Fistos",
-            'role' => "mechanic"
-        ]);
+        if (checkDatabaseConnection()) {
+            $default_admin = [
+                'email' => "admin@f1-garage.com",
+                'password' => Hash::make("admin"),
+                'name' => "Edemond Garo",
+                'role' => "admin"
+            ];
+
+            $default_tech = [
+                'email' => "tech@f1-garage.com",
+                'password' => Hash::make("technician"),
+                'name' => "Hector Fistos",
+                'role' => "mechanic"
+            ];
+
+            if (!User::where('email', $default_admin['email'])->exists()) User::create($default_admin);
+            //
+            if (!User::where('email', $default_tech['email'])->exists()) User::create($default_tech);
+        }
     }
 }

@@ -8,12 +8,14 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\VehiculeController;
 use App\Http\Controllers\SparepartController;
 use App\Http\Controllers\ReparationController;
+use Illuminate\Support\Facades\Log;
 
 Route::get('/', function () {
     return redirect('/login');
 });
 
 Route::get('/login', function () {
+    Log::info("SignIn page");
     return view("auth/signin");
 });
 
@@ -25,8 +27,9 @@ Route::post("/login", [AuthController::class, 'login']);
 Route::post("/signup", [AuthController::class, 'signup']);
 
 Route::get("/dashboard", function () {
+
     return view("clients/index");
-});
+})->middleware('auth');
 
 Route::resource('/clients', ClientController::class);
 
@@ -46,10 +49,7 @@ Route::get('/changeLocale/{locale}', function ($locale) {
     return redirect()->back();
 })->name('vehicules.changeLocale');
 
-
-
 Route::resource('reparations', ReparationController::class);
-
 
 Route::get('/test', [ReparationController::class, 'test'])->name('test');
 
@@ -59,10 +59,7 @@ Route::post('/reparations/delete', [ReparationController::class, 'delete'])->nam
 
 Route::post('/reparations/showModal', [ReparationController::class, 'showModal'])->name('reparations.showModal');
 
-
-
 Route::resource('spareparts', SparepartController::class);
-
 
 Route::get('/test', [SparepartController::class, 'test'])->name('test');
 
