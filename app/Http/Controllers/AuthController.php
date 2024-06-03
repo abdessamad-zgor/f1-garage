@@ -12,6 +12,23 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
+
+    public function login_view(Request $request)
+    {
+        if (Auth::check()) {
+            return redirect('/dashboard');
+        }
+        return view('auth.signin');
+    }
+
+    public function signup_view(Request $request)
+    {
+        if (Auth::check()) {
+            return redirect('/dashboard');
+        }
+        return view('auth.signup');
+    }
+
     public function login(Request $request): RedirectResponse
     {
         $credentials = [
@@ -55,5 +72,12 @@ class AuthController extends Controller
             $errors = $err->validator->errors();
             return back()->withErrors($errors);
         }
+    }
+
+
+    public function logout(Request $request): RedirectResponse
+    {
+        Auth::logout();
+        return redirect('/login');
     }
 }

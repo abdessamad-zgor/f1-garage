@@ -14,20 +14,16 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::get('/login', function () {
-    Log::info("SignIn page");
-    return view("auth/signin");
-});
+Route::get('/login', [AuthController::class, 'login_view']);
 
-Route::get('/signup', function () {
-    return view("auth/signup");
-});
+Route::get('/signup', [AuthController::class, 'signup_view']);
+
+Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::post("/login", [AuthController::class, 'login']);
 Route::post("/signup", [AuthController::class, 'signup']);
 
 Route::get("/dashboard", function () {
-
     return view("clients/index");
 })->middleware('auth');
 
