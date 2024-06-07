@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('model');
             $table->string('fuel_type');
             $table->string('registration_number')->unique();
-            $table->text('photos')->nullable();
             $table->timestamps();
 
             $table->foreignId('client_id')->constrained()->onDelete('cascade');

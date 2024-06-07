@@ -1,54 +1,158 @@
-@extends('layouts.app')
-
-@section('content')
-
-<div id="showdiv"></div>
-<div class='max-w-md mx-auto'>
-    <div class="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
-        <div class="grid place-items-center h-full w-12 text-gray-300">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-        </div>
-<form id="searchForm" onsubmit="return submitForm(event)" action="{{ route('vehicules.search') }}" method="post">
-    @csrf
- <input
-        class="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
-        type="text"
-        id="search" name="search"
-        placeholder="{{ trans('Search something..') }}" />
-
-</form>
-
-
-    </div>
+@extends('dashboard.index')
+@section('tab-content')
+<div class="w-full px-8">
+<h1 class="text-7xl block">Vehicules</h1>
+<div class="relative block w-full overflow-x-auto sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="p-4">
+                    <div class="flex items-center">
+                        <input id="checkbox-all-search" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="checkbox-all-search" class="sr-only">checkbox</label>
+                    </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Product name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Color
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Category
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Price
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                        <input id="checkbox-table-search-2" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="checkbox-table-search-2" class="sr-only">checkbox</label>
+                    </div>
+                </td>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                    Microsoft Surface Pro
+                </th>
+                <td class="px-6 py-4">
+                    White
+                </td>
+                <td class="px-6 py-4">
+                    Laptop PC
+                </td>
+                <td class="px-6 py-4">
+                    $1999
+                </td>
+                <td class="px-6 py-4">
+                    <a href="#" class="font-medium text-blue-600  hover:underline">Edit</a>
+                </td>
+            </tr>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                        <input id="checkbox-table-search-3" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="checkbox-table-search-3" class="sr-only">checkbox</label>
+                    </div>
+                </td>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                    Magic Keyboard
+                </th>
+                <td class="px-6 py-4">
+                    Black
+                </td>
+                <td class="px-6 py-4">
+                    Accessories
+                </td>
+                <td class="px-6 py-4">
+                    $99
+                </td>
+                <td class="px-6 py-4">
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                        <input id="checkbox-table-search-3" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="checkbox-table-search-3" class="sr-only">checkbox</label>
+                    </div>
+                </td>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                    Smart Folio iPad Air
+                </th>
+                <td class="px-6 py-4">
+                    Blue
+                </td>
+                <td class="px-6 py-4">
+                    Accessories
+                </td>
+                <td class="px-6 py-4">
+                    $79
+                </td>
+                <td class="px-6 py-4">
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                        <input id="checkbox-table-search-3" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="checkbox-table-search-3" class="sr-only">checkbox</label>
+                    </div>
+                </td>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                    AirTag
+                </th>
+                <td class="px-6 py-4">
+                    Silver
+                </td>
+                <td class="px-6 py-4">
+                    Accessories
+                </td>
+                <td class="px-6 py-4">
+                    $29
+                </td>
+                <td class="px-6 py-4">
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <nav class="flex items-center flex-wrap md:flex-row justify-between pt-4" aria-label="Table navigation">
+        <span class="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">Showing <span class="font-semibold text-gray-900 dark:text-white">1-10</span> of <span class="font-semibold text-gray-900 dark:text-white">1000</span></span>
+        <ul class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
+            <li>
+                <a href="#" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
+            </li>
+            <li>
+                <a href="#" aria-current="page" class="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
+            </li>
+            <li>
+        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
 </div>
 
-
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>{{__('Laravel 10 CRUD Example from scratch - ItSolutionStuff.com')}}</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('vehicules.create') }}"> @lang('Create New Product')</a>
-            </div>
-        </div>
-    </div>
-
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-    @endif
-
-    <div id="searchResult">
-        @include('vehicules.search')
-
-    </div>
-
-
-@include('modals.deleteVehicule')
 
 @endsection
 @section("scripts")

@@ -10,16 +10,15 @@ class Client extends Model
     use HasFactory;
 
     protected $fillable = [
-        'firstName',
-        'lastName',
-        'adress',
-        'phoneNumber',
+        'address',
+        'phone',
+        'company',
         'user_id',
     ];
 
     // Définition de la relation
     public function user()
     {
-        return $this->belongsTo(Utilisateur::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

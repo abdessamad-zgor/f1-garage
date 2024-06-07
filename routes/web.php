@@ -8,6 +8,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\VehiculeController;
 use App\Http\Controllers\SparepartController;
 use App\Http\Controllers\ReparationController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 Route::get('/', function () {
@@ -24,14 +25,18 @@ Route::post("/login", [AuthController::class, 'login']);
 Route::post("/signup", [AuthController::class, 'signup']);
 
 Route::get("/dashboard", function () {
-    return view("clients/index");
+    if (Auth::user()->role == 'client') {
+        return view("vehicules/index");
+    } elseif (Auth::user()->role == 'admin') {
+        return view("clients/index");
+    } elseif (Auth::user()->role == 'mechanic') {
+        return view('reparations/index');
+    }
 })->middleware('auth');
 
-Route::resource('/clients', ClientController::class);
+Route::get('/clients', [ClientController::class, 'index']);
 
-Route::resource('vehicules', VehiculeController::class);
-
-Route::get('/test', [VehiculeController::class, 'test'])->name('test');
+Route::get('/vehicules', [VehiculeController::class, 'index']);
 
 Route::post('/vehicules/search', [VehiculeController::class, 'search'])->name('vehicules.search');
 
@@ -47,7 +52,6 @@ Route::get('/changeLocale/{locale}', function ($locale) {
 
 Route::resource('reparations', ReparationController::class);
 
-Route::get('/test', [ReparationController::class, 'test'])->name('test');
 
 Route::post('/reparations/search', [ReparationController::class, 'search'])->name('reparations.search');
 
@@ -56,8 +60,6 @@ Route::post('/reparations/delete', [ReparationController::class, 'delete'])->nam
 Route::post('/reparations/showModal', [ReparationController::class, 'showModal'])->name('reparations.showModal');
 
 Route::resource('spareparts', SparepartController::class);
-
-Route::get('/test', [SparepartController::class, 'test'])->name('test');
 
 Route::post('/spareparts/search', [SparepartController::class, 'search'])->name('spareparts.search');
 

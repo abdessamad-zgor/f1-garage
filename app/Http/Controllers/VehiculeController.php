@@ -2,28 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client as ModelsClient;
 use App\Models\Vehicule;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Spatie\FlareClient\Http\Client;
 use Illuminate\Http\RedirectResponse;
 
 
 class VehiculeController extends Controller
 {
+
     public function index(): View
     {
         $vehicules = Vehicule::all();
-
-        return view('vehicules.index', compact('vehicules'));
+        return view('vehicules.index', ['vehicules' => $vehicules]);
     }
-
 
     public function search(): View
     {
-
-        $Vehicules = Vehicule::where('model', 'like', '%' . request('search') . '%')
+        $vehicules = Vehicule::where('model', 'like', '%' . request('search') . '%')
             ->orWhere('fuel_type', 'like', '%' . request('search') . '%')
             ->get();
 
@@ -37,38 +35,17 @@ class VehiculeController extends Controller
         return "ok";
     }
 
-
     public function showModal(Request $request)
     {
-
         $vehicule = Vehicule::find($request->id);
-
         return view("modals.showVehicule", compact('vehicule'));
     }
 
-    /*    public function changeLocale($locale)
-    {
-        session()->put("locale",$locale);
-        return redirect()->back();
-
-    }*/
-
-
-    public function test()
-    {
-        return 'ça marche';
-    }
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(): View
     {
         return view('vehicules.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
@@ -80,35 +57,24 @@ class VehiculeController extends Controller
             'photos' => 'required',
         ]);
 
-        // Vehicule::create($request->all());
-
         $vehicule = new Vehicule($request->all());
-        $client = Client::findOrFail($request->input('client_id')); // Assuming you have a Client model
+        $client = ModelsClient::findOrFail($request->input('client_id')); // Assuming you have a Client model
         $client->vehicules()->save($vehicule);
 
         return redirect()->route('vehicules.index')
-            ->with('success', 'vehicules created successfully.');
+            ->with('success', 'vehicule created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Vehicule $vehicule): View
     {
         return view('vehicules.show', compact('vehicule'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Vehicule $vehicule): View
     {
         return view('vehicules.edit', compact('vehicule'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Vehicule $vehicule): RedirectResponse
     {
         $request->validate([
@@ -122,12 +88,9 @@ class VehiculeController extends Controller
         $vehicule->update($request->all());
 
         return redirect()->route('vehicules.index')
-            ->with('success', 'Product updated successfully');
+            ->with('success', 'vehicule updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Vehicule $vehicule): RedirectResponse
     {
         $vehicule->delete();
